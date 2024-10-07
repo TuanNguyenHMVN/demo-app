@@ -1,0 +1,39 @@
+.starknet-app {
+  font-family: 'DM Sans', sans-serif;
+  color: #0F0B46;
+
+  .btn {
+    padding: 5px 20px;
+    font-size: 14px;
+  }
+
+  .btn-primary {
+    background: #0F0B46 !important;
+    color: #fff;
+    border: none;
+  }
+}
+
+@for $i from 1 through 100 {
+  .font-#{$i} {
+    font-size: #{$i}px !important;
+  }
+}
+
+@for $i from 1 through 1000 {
+  .font-weight-#{$i} {
+    font-weight: #{$i} !important;
+  }
+}
+
+@for $i from 1 through 1000 {
+  .w-#{$i} {
+    width: $i * 1% !important;
+  }
+}
+
+@for $i from 1 through 100 {
+  .h-#{$i} {
+    height: $i * 1% !important;
+  }
+}
