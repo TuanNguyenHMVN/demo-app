@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
+  <div class="footer-container">
     <b-row class="d-flex align-items-center">
       <b-col md="3" sm="12">
-        <div class="d-sm-none d-md-flex align-items-center menu-links">
+        <div class="d-sm-none d-md-flex align-items-center justify-content-end menu-links">
           <a href="/" class="home-link">
             Home
           </a>

@@ -1,12 +1,14 @@
 <template>
   <div class="wallet-wrapper container">
-    <div class="stake-withdraw-btn mb-3 d-flex align-items-center">
-      <b-button :variant="isStake ? 'primary' : 'secondary'" @click="onChangeAction('Stake')">
-          Stake
-        </b-button>
-        <b-button :variant="isWithdraw ? 'primary' : 'secondary'" @click="onChangeAction('Withdraw')">
-          Withdraw
-        </b-button> 
+    <div class="combo-btn-wrapper">
+      <div class="stake-withdraw-btn d-flex align-items-center">
+        <b-button :variant="isStake ? 'primary' : 'secondary'" @click="onChangeAction('Stake')">
+            Stake
+          </b-button>
+          <b-button :variant="isWithdraw ? 'primary' : 'secondary'" @click="onChangeAction('Withdraw')">
+            Withdraw
+          </b-button> 
+      </div>
     </div>
     <div class="wallet">
       <b-row>
@@ -26,8 +28,8 @@
             <div>
               213.00 STRK
             </div>
-            <div class="token-address">
-              0xabc....xyz <img src='../assets/images/helmet_icon.png' />
+            <div v-if="walletAddress" class="token-address">
+              {{`${walletAddress.slice(0,5)}...${walletAddress.slice(-3)}`}} <img src='../assets/images/helmet_icon.png' />
             </div>
           </b-col>
           <b-col md="12" class="count-request">
@@ -62,7 +64,7 @@
           </b-col>
         </div>
         <b-col md="12" class="combo-btn">
-          <b-button v-if="!isConnected" variant="primary" pill @click="connectWallet">
+          <b-button v-if="!isConnected" variant="primary" pill @click="connect">
             Connect Wallet
           </b-button>
           <b-button v-if="isStake && isConnected" variant="primary" pill @click="stake">
@@ -84,41 +86,53 @@
   </div>
 </template>
 <script setup>
-import { useStakingContract } from '~/composables/useStakingContract';
-
+import { useWallet } from '~/composables/useWallet';
 import { ref } from 'vue'
 
-const { stakeTokens, claimRewards, withdrawTokens } = useStakingContract();
+// const { stakeTokens, claimRewards, withdrawTokens } = useStakingContract();
 const isConnected = ref(false)
 const isStake = ref(true)
 const isWithdraw = ref(false)
 const isRequest = ref(false)
 const isClaim = ref(false)
 
+const { walletAddress, setWalletAddress } = useWallet();
 
-async function stake() {
-  try {
-    const amount = 30;
-    const tx = await stakeTokens(amount, accountAddress.value);
-    console.log('Staked:', tx);
-  } catch (error) {
-    console.error('Error staking:', error);
-  }
+
+const connect = async () => {
+    if (window.starknet && window.starknet.isConnected) {
+      isConnected.value = true;
+      setWalletAddress(window.starknet.selectedAddress);
+    } else if (window.starknet) {
+      await window.starknet.enable();  // Prompts the user to connect their wallet
+    } else {
+      alert('No StarkNet wallet found. Please install Argent X or Braavos.');
+    }
 }
 
-const accountAddress = ref(null);
+// async function stake() {
+//   try {
+//     const amount = 30;
+//     const tx = await stakeTokens(amount, accountAddress.value);
+//     console.log('Staked:', tx);
+//   } catch (error) {
+//     console.error('Error staking:', error);
+//   }
+// }
 
-const { $stakingContract } = useNuxtApp();
-const connectWallet = async () => {
-  if (window.starknet && window.starknet.isConnected) {
-    isConnected.value = true;
-    accountAddress.value = window.starknet.selectedAddress;
-  } else if (window.starknet) {
-    await window.starknet.enable();  // Prompts the user to connect their wallet
-  } else {
-    alert('No StarkNet wallet found. Please install Argent X or Braavos.');
-  }
-}
+// const accountAddress = ref(null);
+
+// const { $stakingContract } = useNuxtApp();
+// const connectWallet = async () => {
+//   if (window.starknet && window.starknet.isConnected) {
+//     isConnected.value = true;
+//     accountAddress.value = window.starknet.selectedAddress;
+//   } else if (window.starknet) {
+//     await window.starknet.enable();  // Prompts the user to connect their wallet
+//   } else {
+//     alert('No StarkNet wallet found. Please install Argent X or Braavos.');
+//   }
+// }
 
 const onChangeAction = (action) => {
   isStake.value = action === 'Stake';
@@ -214,6 +228,7 @@ const onChangeWithdrawAction = (action) => {
       background: #E4E4EA;
       width: fit-content;
       border-radius: 25px;
+      margin-bottom: 10px;
       button {
         border-radius: 25px;
         padding: 10px 25px;
@@ -226,9 +241,14 @@ const onChangeWithdrawAction = (action) => {
         margin: auto;
         margin-top: 20px;
       }
-      .stake-withdraw-btn {
-        text-align: center;
+      .combo-btn-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         margin-top: 30px;
+        .stake-withdraw-btn {
+          margin-bottom: 0;
+        }
       }
     }
     @media screen and (min-width: 768px) and (max-width: 992px) {

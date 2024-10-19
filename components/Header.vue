@@ -18,8 +18,13 @@
             FAQs
           </nuxt-link>
         </div>
-        <div>
-          wallet
+        <div class="wallet-address d-flex align-items-center">
+          <div>
+            213.00 STRK | 
+          </div>
+          <div class="token-address">
+            {{`${walletAddress.slice(0,5)}...${walletAddress.slice(-3)}`}} <img src='../assets/images/helmet_icon.png' />
+          </div>
         </div>
       </div>
       <div class="menu-dropdown-icon">
@@ -47,10 +52,12 @@
     </div>
   </div>
 </template>
-<script>
-export default {
-  
-}
+<script setup>
+import { useWallet } from '~/composables/useWallet';
+import { ref } from 'vue'
+
+const { walletAddress } = useWallet();
+
 </script>
 <style lang="scss">
   .header-container {
@@ -73,8 +80,25 @@ export default {
       display: flex;
       gap: 10px;
       align-items: center;
-      justify-content: space-around;
       padding: 0 30px;
+      .wallet-address {
+        min-width: 200px;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 20px;
+        padding: 0 10px;  
+        border: 1px solid #0F0B46;
+        .token-address {
+          display: flex;
+          align-items: center;
+          margin-left: 10px;
+          img {
+            height: 15px;
+            width: 15px;
+            margin-left: 5px;
+          }
+        }
+      }
     }
     .menu-dropdown-icon {
       display: none;
