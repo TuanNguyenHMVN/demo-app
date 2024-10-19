@@ -17,6 +17,7 @@ export default defineNuxtConfig({
   },
   plugins: [
     { src: '~/plugins/bootstrap-vue.js', mode: 'client' },
+    '~/plugins/staking.js'
   ],
   css: [
     '@/assets/styles/style.scss',

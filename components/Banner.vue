@@ -13,9 +13,16 @@ export default {
 </script>
 <style lang="scss">
   .banner-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     img {
       width: 300px;
+    }
+    h1 {
+      width: 80%;
     }
   }
 </style>
