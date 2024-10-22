@@ -1,4 +1,5 @@
 export default defineNuxtConfig({
+  ssr: true,
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   app: {
@@ -17,7 +18,8 @@ export default defineNuxtConfig({
   },
   plugins: [
     { src: '~/plugins/bootstrap-vue.js', mode: 'client' },
-    '~/plugins/staking.js'
+    '~/plugins/staking.js',
+    '~/plugins/pinia.js'
   ],
   css: [
     '@/assets/styles/style.scss',

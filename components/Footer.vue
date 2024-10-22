@@ -1,67 +1,67 @@
 <template>
   <div class="footer-container">
-    <b-row class="d-flex align-items-center">
-      <b-col md="3" sm="12">
-        <div class="d-sm-none d-md-flex align-items-center justify-content-end menu-links">
-          <a href="/" class="home-link">
-            Home
-          </a>
-          <a href="/staking" class="staking-link">
-            Staking
-          </a>
-          <a href="/faq" class="faq-link">
-            FAQs
-          </a>
-        </div>
-        <div class="d-sm-block d-md-none text-center">
-          <span class="site-name font-64">
-          stakestark_
-          </span><br/>
-          <span class="subtitle font-14">
-            starknet's to-go
-          </span>
-          <span class="highlight-text font-14">
-            liquid staking protocol
-          </span>
-        </div>
-      </b-col>
-      <b-col md="6" class="text-center">
-        <div class="d-sm-flex d-md-none align-items-center menu-links justify-content-center pt-4 pb-4">
-          <a href="/" class="home-link">
-            Home
-          </a>
-          <a href="/staking" class="staking-link">
-            Staking
-          </a>
-          <a href="/faq" class="faq-link">
-            FAQs
-          </a>
-        </div>
-        <div class="d-sm-none d-md-block">
-          <span class="site-name font-64">
-          stakestark_
-          </span><br/>
-          <span class="subtitle font-14">
-            starknet's to-go
-          </span>
-          <span class="highlight-text font-14">
-            liquid staking protocol
-          </span>
-        </div>
-      </b-col>
-      <b-col md="3" class="text-center">
-        <i class="bi bi-telegram telegram-icon social-icon font-24"></i>
-        <i class="bi bi-twitter-x social-icon font-24"></i>
-      </b-col>
-      <b-col md="12">
-        <div class="text-center authorship">
-        <i class="bi bi-c-circle"></i>
-        <span>
-          2024 StakeStark. All Rights reserved.
+    <div class="md-footer d-flex align-items-center justify-content-space-around">
+      <div class="menu-links footer-links text-center">
+        <a href="/" class="home-link">
+          Home
+        </a>
+        <a href="/staking" class="staking-link">
+          Staking
+        </a>
+        <a href="/faq" class="faq-link">
+          FAQs
+        </a>
+      </div>
+      <div class="footer-site-name text-center">
+        <span class="site-name font-64">
+        stakestark_
+        </span><br/>
+        <span class="subtitle font-14">
+          starknet's to-go
+        </span>
+        <span class="highlight-text font-14">
+          liquid staking protocol
         </span>
       </div>
-      </b-col>
-    </b-row>
+      <div class="text-right footer-social">
+        <i class="bi bi-telegram telegram-icon social-icon font-24"></i>
+        <i class="bi bi-twitter-x social-icon font-24"></i>
+      </div>
+    </div>
+    <div class="sm-footer d-flex flex-column align-items-center justify-content-center">
+      <div class="text-center">
+        <span class="site-name font-64">
+        stakestark_
+        </span><br/>
+        <span class="subtitle font-14">
+          starknet's to-go
+        </span>
+        <span class="highlight-text font-14">
+          liquid staking protocol
+        </span>
+      </div>
+      <div class="text-center footer-links">
+        <a href="/" class="home-link">
+          Home
+        </a>
+        <a href="/staking" class="staking-link">
+          Staking
+        </a>
+        <a href="/faq" class="faq-link">
+          FAQs
+        </a>
+      </div>
+      <div class="text-right footer-social">
+        <i class="bi bi-telegram telegram-icon social-icon font-24"></i>
+        <i class="bi bi-twitter-x social-icon font-24"></i>
+      </div>
+    </div>
+    <div class="text-center authorship">
+      <i class="bi bi-c-circle"></i>
+      <span>
+        2024 StakeStark. All Rights reserved.
+      </span>
+    </div>
   </div>
 </template>
 <script>
@@ -70,7 +70,7 @@ export default {
 }
 </script>
 <style lang="scss">
-  .menu-links {
+  .footer-links {
     a {
       padding: 0 15px;
       text-decoration: none;
@@ -106,6 +106,20 @@ export default {
   .social-links {
     text-align: right;
   }
+  .md-footer {
+    .footer-site-name {
+      width: 50%;
+    }
+    .footer-social, .menu-links {
+      width: 25%;
+      text-align: center;
+    }
+  }
+  .sm-footer {
+    .footer-links {
+      margin: 20px auto;
+    }
+  }
   @media screen and (min-width: 768px) and (max-width: 992px) {
     .site-name {
       font-size: 40px !important;
@@ -115,8 +129,21 @@ export default {
     }
   }
   @media screen and (max-width: 768px) {
+    .md-footer {
+      display: none !important;
+    }
     .social-icon {
       font-size: 32px !important;
+    }
+  }
+  @media screen and (max-width: 575.98px) {
+    .sm-hide {
+      display: none !important;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    .sm-footer {
+      display: none !important;
     }
   }
 </style>
