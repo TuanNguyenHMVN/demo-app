@@ -29,7 +29,6 @@
     "sass-embedded": "^1.79.4"
   },
   "engines": {
-    "node": "19.x",
-    "npm": "9.x"
+    "node": "19.x"
   }
 }
